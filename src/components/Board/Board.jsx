@@ -13,22 +13,26 @@ const Board = () => {
     return Math.random() * (max - min) + min;
   };
 
+  const launchConfetti = () => {
+    const interval = setInterval(() => {
+      confetti({
+        angle: randomInRange(55, 200),
+        spread: randomInRange(50, 70),
+        particleCount: randomInRange(50, 100),
+        origin: { y: 0.6 },
+      });
+    }, 300);
+
+    setTimeout(() => {
+      clearInterval(interval);
+    }, 2000);
+  };
+
   useEffect(() => {
     const winner = calculateWinner(squares);
 
     if (winner) {
-      const interval = setInterval(() => {
-        confetti({
-          angle: randomInRange(55, 200),
-          spread: randomInRange(50, 70),
-          particleCount: randomInRange(50, 100),
-          origin: { y: 0.6 },
-        });
-      }, 300);
-
-      setTimeout(() => {
-        clearInterval(interval);
-      }, 2000);
+      launchConfetti();
     }
   }, [squares]);
 
