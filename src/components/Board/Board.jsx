@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Board.module.css";
 import Square from "../Square/Square";
 import { calculateWinner } from "../../utils";
@@ -7,6 +7,26 @@ const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [wins, setWins] = useState({ X: 0, O: 0 });
+  // const [winner, setWinner] = useState(null);
+
+  useEffect(() => {
+    const winner = calculateWinner(squares);
+
+    if (winner) {
+      const interval = setInterval(() => {
+        confetti({
+          angle: Math.random() * 70 + 55,
+          spread: Math.random() * 20 + 50,
+          particleCount: Math.random() * 50 + 50,
+          origin: { y: 0.6 },
+        });
+      }, 300);
+
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 2000);
+    }
+  }, [squares]);
 
   const renderSquare = (i) => {
     return <Square value={squares[i]} onClickFunc={() => handleClick(i)} />;
