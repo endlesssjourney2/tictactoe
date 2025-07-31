@@ -17,12 +17,19 @@ export const calculateWinner = (squares) => {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      confetti({
-        angle: randomInRange(55, 125),
-        spread: randomInRange(50, 70),
-        particleCount: randomInRange(50, 100),
-        origin: { y: 0.6 },
-      });
+      const interval = setInterval(() => {
+        confetti({
+          angle: randomInRange(55, 125),
+          spread: randomInRange(50, 70),
+          particleCount: randomInRange(50, 100),
+          origin: { y: 0.6 },
+        });
+      }, 500);
+
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 2000);
+
       return squares[a];
     }
   }
