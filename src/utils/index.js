@@ -1,7 +1,3 @@
-function randomInRange(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
 export const calculateWinner = (squares) => {
   const lines = [
     [0, 1, 2],
