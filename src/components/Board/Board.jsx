@@ -24,7 +24,7 @@ const Board = () => {
           particleCount: randomInRange(50, 100),
           origin: { y: 0.6 },
         });
-      }, 500);
+      }, 300);
 
       setTimeout(() => {
         clearInterval(interval);
